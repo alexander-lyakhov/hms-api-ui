@@ -109,11 +109,14 @@ aside {
 pre {
   font: 1rem "lucida console";
   line-height: 1.4;
+  padding-bottom: .5rem;
+}
+
+pre.success {
+  color: #00f080;
 }
 
 pre.title {
-  color: #fff;
-  background: #488;
-  padding: 0 .5rem;
+  color: #e0e0e0;
 
 }

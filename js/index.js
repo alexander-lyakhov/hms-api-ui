@@ -1,25 +1,48 @@
 ﻿(function() {
-  herm = {
+  const echo = {
     init() {
       this.terminal = document.querySelector('.terminal')
       console.log('init', this.terminal)
     },
 
-    clearTerminal() {
+    clear() {
       this.terminal.innerHTML = ''
     },
 
-    echo(data = {}) {
+    success(data = {}) {
+      this.print(data, 'success')
+      return this
+    },
+
+    error(data = {}) {
+      this.print(data, 'error')
+      return this
+    },
+
+    title(data = {}) {
+      this.print(data, 'title')
+      return this
+    },
+
+    text(data = {}) {
+      this.print(data)
+      return this
+    },
+
+    print(data = {}, className = 'info') {
       const text = typeof data === 'string' ? data : data.text
 
       const pre = document.createElement('pre')
       pre.textContent = text
+      pre.className = className
       this.terminal.appendChild(pre)
-    },
 
+      return pre
+    }
+  }
+
+  const api = {
     async fetch(url = '') {
-      this.clearTerminal()
-
       const data = {}
 
       const res = await fetch(url).then(
@@ -40,27 +63,28 @@
     async getUsers() {
       const data = await this.fetch('https://jsonplaceholder.typicode.com/users')
 
-      this.echo('-----------')
-      this.echo(' Get Users ')
-      this.echo('-----------')
+      echo.clear()
+
+      echo.title('--[ Get Users ]--')
       console.log('data', data)
-      this.echo(data)
+      echo.text(data)
     },
 
     async getAlbums() {
-      this.echo('[ Get Albums ]')
+      echo.clear()
+      echo.text('[ Get Albums ]')
       const data = await this.fetch('https://jsonplaceholder.typicode.com/albums')
       console.log('data', data)
-      this.echo(data)
+      echo.text(data)
     }
   }
 
-  herm.init()
+  echo.init()
 
   document.querySelectorAll('.btn-action').forEach(el => {
     //console.log(el)
     el.addEventListener('click', e => {
-      herm[el.getAttribute('data-action')]()
+      api[el.getAttribute('data-action')]()
     })
   })
 })()
