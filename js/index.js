@@ -10,12 +10,22 @@
     },
 
     success(data = {}) {
-      this.print(data, 'success')
+      this.terminal.insertAdjacentHTML('beforeend', `
+        <pre class="success">
+          <span>${data.code}</span>
+          <span>SUCCESS</span>
+        </pre>
+      `)
       return this
     },
 
     error(data = {}) {
-      this.print(data, 'error')
+      this.terminal.insertAdjacentHTML('beforeend', `
+        <pre class="error">
+          <span>${data.code}</span>
+          <span>ERROR</span>
+        </pre>
+      `)
       return this
     },
 
@@ -48,6 +58,7 @@
       const res = await fetch(url).then(
         res => {
           console.log(res)
+          data.ok = res.ok
           data.msg = res.ok ? 'success':'error'
           data.code = res.status
           return res.json()
@@ -61,19 +72,30 @@
     },
 
     async getUsers() {
-      const data = await this.fetch('https://jsonplaceholder.typicode.com/users')
+      const data = await this.fetch('https://jsonplaceholder.typicode.com/sers')
 
       echo.clear()
 
-      echo.title('--[ Get Users ]--')
+      echo.title('[ Get Users ]')
+      data.ok ? echo.success(data):echo.error(data)
       console.log('data', data)
       echo.text(data)
     },
 
     async getAlbums() {
       echo.clear()
-      echo.text('[ Get Albums ]')
+      echo.title('[ Get Albums ]')
       const data = await this.fetch('https://jsonplaceholder.typicode.com/albums')
+      data.ok ? echo.success(data):echo.error(data)
+      console.log('data', data)
+      echo.text(data)
+    },
+
+    async getPosts() {
+      echo.clear()
+      echo.title('[ Get Posts ]')
+      const data = await this.fetch('https://jsonplaceholder.typicode.com/posts')
+      data.ok ? echo.success(data):echo.error(data)
       console.log('data', data)
       echo.text(data)
     }
