@@ -11,7 +11,7 @@
 
     success(data = {}) {
       this.terminal.insertAdjacentHTML('beforeend', `
-        <pre class="success">
+        <pre class="status success">
           <span>${data.code}</span>
           <span>SUCCESS</span>
         </pre>
@@ -21,7 +21,7 @@
 
     error(data = {}) {
       this.terminal.insertAdjacentHTML('beforeend', `
-        <pre class="error">
+        <pre class="status error">
           <span>${data.code}</span>
           <span>ERROR</span>
         </pre>
