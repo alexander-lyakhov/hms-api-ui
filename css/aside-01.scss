@@ -1,19 +1,31 @@
 aside {
+  font: 1rem "lucida console";
   background: #404040a0;
   width: 320px;
   height: 100vh;
   flex-shrink: 0;
+
+  .user {
+    font: 1.25rem verdana;
+    color: #c0f0f0;
+    background: #00808080;
+    text-align: center;
+    padding: 1rem .25rem;
+  }
 }
 
+.user {
+}
 .controls {
 }
 
 .btn-action {
-  font: 1rem "lucida console";
-  //color: #ec9;
   color: #c0c0c0;
   background: #00000060;
   border: 0;
+  text-decoration: none;
+  text-align: center;
+  display: block;
   width: 100%;
   margin: 0 0 1px 0;
   padding: .75rem 1rem;
@@ -23,45 +35,33 @@ aside {
   &:after {
     content: '';
     display: block;
-    border-radius: 50%;
-    width: 6px;
-    height: 6px;
+    width: 4px;
+    height: 4px;
     position: absolute;
     left: 4px;
     top: 50%;
     transform: translate(0, -50%);
-
+    transition: height .25s;
   }
 
-  &.get {
-    &:after {
-      background: #00a0c0;
-    }
-    &:hover:after {
-      background: #00c0f0;
-    }
+  &:hover:after {
+    height: 100%;
   }
 
-  &.post {
-    &:after {
-      background: #00c0a0;
-    }
-    &:hover:after {
-      background: #00e0c0;
-    }
+  &.get:after {
+    background: #00c0f0;
   }
 
-  &.delete {
-    &:after {
-      background: #e08080;
-    }
-    &:hover:after {
-      background: #ff8080;
-    }
+  &.post:after {
+    background: #00e0c0;
+  }
+
+  &.delete:after {
+    background: #ff8080;
   }
 
   &:hover {
-    color: #f0f0f0;
+    color: #fff;
     background: #606060a0;
   }
 
