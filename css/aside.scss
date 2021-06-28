@@ -1,27 +1,30 @@
-aside {
-  background: #00000040;
-  width: 400px;
-  height: 100%;
-}
+.herm-api-ui {
 
-.controls {
-  padding: .5rem 1rem;
-}
+  aside {
+    background: #00000040;
+    width: 400px;
+    height: 100%;
+  }
 
-.btn-action {
-  font-size: 1rem;
-  color: #ec9;
-  background: rgba(40, 40, 40, .85);
-  border: 2px solid #000;
-  outline: 1px solid #808080;
-  letter-spacing: 1px;
-  width: 100%;
-  margin: 0 0 .75rem;
-  padding: .5rem 1rem;
-  cursor: pointer;
+  .controls {
+    padding: .5rem 1rem;
+  }
 
-  &:hover {
-    color: #f0f0f0;
-    outline: 1px solid #c96;
+  .btn-action {
+    font-size: 1rem;
+    color: #ec9;
+    background: rgba(40, 40, 40, .85);
+    border: 2px solid #000;
+    outline: 1px solid #808080;
+    letter-spacing: 1px;
+    width: 100%;
+    margin: 0 0 .75rem;
+    padding: .5rem 1rem;
+    cursor: pointer;
+
+    &:hover {
+      color: #f0f0f0;
+      outline: 1px solid #c96;
+    }
   }
 }
