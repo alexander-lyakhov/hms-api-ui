@@ -1,3 +1,14 @@
+@mixin flex-box($w, $h, $h-align: center, $v-align: center) {
+  display: flex;
+  width: $w;
+  height: $h;
+  justify-content: $h-align;
+  align-items: $v-align;
+}
+
+/*
+ * Imorts
+ */
 @import 'aside-01.scss';
 
 .herm-api-ui {
@@ -49,6 +60,7 @@
     padding: 0 0 .75rem 0;
 
     &.status {
+      @include flex-box(auto, 48px, flex-start);
       border-bottom: 1px solid #808080;
       margin: 0 0 .75rem 0;
     }
@@ -87,6 +99,26 @@
     &.title {
       color: #e0e0e0;
 
+    }
+  }
+
+  .btn-close {
+    @include flex-box(48px, 48px);
+    font: 2.5rem arial, "lucida console";
+    color: #a8a8a8;
+    background: #808080a0;
+    border-radius: 50%;
+    text-decoration: none;
+    position: fixed;
+    top: 1rem;
+    right: 2rem;
+    transform: rotate(45deg);
+    transition: transform .25s;
+
+    &:hover {
+      color: #e0e0e0;
+      background: #808080f0;
+      transform: rotate(-45deg);
     }
   }
 }

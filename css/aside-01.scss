@@ -8,11 +8,11 @@
     flex-shrink: 0;
 
     .user {
+      @include flex-box(auto, 56px);
       font: 1.25rem verdana;
       color: #c0f0f0;
       background: #00808080;
-      text-align: center;
-      padding: 1rem .5rem;
+      padding: 0 .5rem;
     }
   }
 

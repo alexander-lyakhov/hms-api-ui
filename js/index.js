@@ -93,10 +93,10 @@
 
     async getPosts() {
       echo.clear()
-      echo.title('[ Get Posts ]')
       const data = await this.fetch('https://jsonplaceholder.typicode.com/posts')
       data.ok ? echo.success(data):echo.error(data)
       console.log('data', data)
+      echo.title('[ Get Posts ]')
       echo.text(data)
     }
   }
