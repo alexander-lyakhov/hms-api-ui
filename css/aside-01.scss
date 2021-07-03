@@ -13,6 +13,7 @@
       color: #c0f0f0;
       background: #00808080;
       padding: 0 .5rem;
+      cursor: default;
     }
   }
 
@@ -61,6 +62,13 @@
     &.delete:after {
       background: #ff8080;
     }
+
+    /*
+    &:focus {
+      color: #ec9;
+      background: #803000a0;
+    }
+    */
 
     &:hover {
       color: #fff;

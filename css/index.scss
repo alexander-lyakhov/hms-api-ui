@@ -61,8 +61,6 @@
 
     &.status {
       @include flex-box(auto, 48px, flex-start);
-      border-bottom: 1px solid #808080;
-      margin: 0 0 .75rem 0;
     }
 
     span {

@@ -5,50 +5,46 @@
       console.log('init', this.terminal)
     },
 
+    print(data = {}, type = 'info') {
+      const text = typeof data === 'string' ? data : data.text
+
+      this.terminal.insertAdjacentHTML('beforeend', `
+        <pre class="${ type }">${ text }</pre>
+      `)
+
+      return this
+    },
+
+    printStatus(data = {}, type = 'success') {
+      this.terminal.insertAdjacentHTML('beforeend', `
+        <pre class="status ${ type }">
+          <span>${data.statusCode}</span>
+          <span>${ type.toUpperCase() }</span>
+        </pre>
+      `)
+
+      return this
+    },
+
     clear() {
       this.terminal.innerHTML = ''
     },
 
-    success(data = {}) {
-      this.terminal.insertAdjacentHTML('beforeend', `
-        <pre class="status success">
-          <span>${data.code}</span>
-          <span>SUCCESS</span>
-        </pre>
-      `)
-      return this
-    },
-
-    error(data = {}) {
-      this.terminal.insertAdjacentHTML('beforeend', `
-        <pre class="status error">
-          <span>${data.code}</span>
-          <span>ERROR</span>
-        </pre>
-      `)
-      return this
-    },
-
     title(data = {}) {
-      this.print(data, 'title')
-      return this
+      return this.print(data, 'title')
     },
 
     text(data = {}) {
-      this.print(data)
-      return this
+      return this.print(data)
     },
 
-    print(data = {}, className = 'info') {
-      const text = typeof data === 'string' ? data : data.text
+    success(data = {}) {
+      return this.printStatus(data, 'success')
+    },
 
-      const pre = document.createElement('pre')
-      pre.textContent = text
-      pre.className = className
-      this.terminal.appendChild(pre)
-
-      return pre
-    }
+    error(data = {}) {
+      return this.printStatus(data, 'error')
+    },
   }
 
   const api = {
@@ -58,9 +54,11 @@
       const res = await fetch(url).then(
         res => {
           console.log(res)
+
           data.ok = res.ok
-          data.msg = res.ok ? 'success':'error'
-          data.code = res.status
+          data.statusText = res.ok ? 'success':'error'
+          data.statusCode = res.status
+
           return res.json()
         },
         err => {
@@ -94,9 +92,9 @@
     async getPosts() {
       echo.clear()
       const data = await this.fetch('https://jsonplaceholder.typicode.com/posts')
-      data.ok ? echo.success(data):echo.error(data)
-      console.log('data', data)
       echo.title('[ Get Posts ]')
+      echo[data.ok ? 'success' : 'error'](data)
+      console.log('data', data)
       echo.text(data)
     }
   }
