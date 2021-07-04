@@ -1,5 +1,5 @@
 ﻿(function() {
-  const echo = {
+  const echo00 = {
     init() {
       this.terminal = document.querySelector('.terminal')
       console.log('init', this.terminal)
@@ -47,6 +47,51 @@
     },
   }
 
+  const echo = function() {
+    const terminal = document.querySelector('.terminal')
+    const _this = {}
+
+    function print(data = {}, type = 'info') {
+      const text = typeof data === 'string' ? data : data.text
+
+      terminal.insertAdjacentHTML('beforeend', `
+        <pre class="${ type }">${ text }</pre>
+      `)
+
+      return _this
+    }
+
+    function printStatus(data = {}, type = 'success') {
+      terminal.insertAdjacentHTML('beforeend', `
+        <pre class="status ${ type }">
+          <span>${data.statusCode}</span>
+          <span>${ type.toUpperCase() }</span>
+        </pre>
+      `)
+
+      return _this
+    }
+
+    Object.assign(_this, {
+      clear:
+        () => terminal.innerHTML = '',
+
+      title:
+        (data = {}) => print(data, 'title'),
+
+      text:
+        (data = {}) => print(data),
+
+      success:
+        (data = {}) => printStatus(data, 'success'),
+
+      error:
+        (data = {}) => printStatus(data, 'error')
+    })
+
+    return _this
+  }()
+
   const api = {
     async fetch(url = '') {
       const data = {}
@@ -92,14 +137,16 @@
     async getPosts() {
       echo.clear()
       const data = await this.fetch('https://jsonplaceholder.typicode.com/posts')
+      echo.title('1').title('2').title('3')
       echo.title('[ Get Posts ]')
       echo[data.ok ? 'success' : 'error'](data)
       console.log('data', data)
       echo.text(data)
+
     }
   }
 
-  echo.init()
+  // echo.init()
 
   document.querySelectorAll('.btn-action').forEach(el => {
     //console.log(el)
