@@ -1,5 +1,4 @@
 .herm-api-ui {
-
   aside {
     font: 1rem "lucida console";
     background: #404040a0;
@@ -10,16 +9,25 @@
     .user {
       @include flex-box(auto, 56px);
       font: 1.25rem verdana;
-      color: #c0f0f0;
-      background: #00808080;
+      color: #e0e0e0;
+      background: #00000060;
+      text-shadow: 1px 1px 0px #000000a0;
+      position: relative;
       padding: 0 .5rem;
       cursor: default;
-    }
-  }
 
-  .user {
-  }
-  .controls {
+      &:after {
+        $offest: 4px;
+        content: '';
+        border: 2px solid #c93;
+        border-radius: 3px;
+        position: absolute;
+        left: $offest;
+        top: $offest;
+        right: $offest;
+        bottom: $offest;
+      }
+    }
   }
 
   .btn-action {
@@ -69,6 +77,10 @@
       background: #803000a0;
     }
     */
+    &.selected {
+      color: #f0f0f0;
+      background: #0080c0a0;
+    }
 
     &:hover {
       color: #fff;
